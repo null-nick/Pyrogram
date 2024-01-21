@@ -58,9 +58,9 @@ class GetChatHistory:
         limit: int = 0,
         offset: int = 0,
         offset_id: int = 0,
+        offset_date: datetime = utils.zero_datetime(),
         min_id: int = 0,
-        max_id: int = 0,
-        offset_date: datetime = utils.zero_datetime()
+        max_id: int = 0
     ) -> Optional[AsyncGenerator["types.Message", None]]:
         """Get messages from a chat history.
 
@@ -87,6 +87,12 @@ class GetChatHistory:
 
             offset_date (:py:obj:`~datetime.datetime`, *optional*):
                 Pass a date as offset to retrieve only older messages starting from that date.
+
+            min_id: (``int``, *optional*):
+                The minimum message id. you will not get any message which have id smaller than min_id.
+
+            max_id: (``int``, *optional*):
+                The maximum message id. you will not get any message which have id greater than max_id.
 
         Returns:
             ``Generator``: A generator yielding :obj:`~pyrogram.types.Message` objects.
